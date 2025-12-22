@@ -274,8 +274,7 @@ def render_about() -> None:
     st.subheader("Sumber Data & Batasan")
     st.markdown(
         "- Data berasal dari survei ibu hamil di Lombok Utara (formulir Google).\n"
-        "- Potensi bias: self-reporting, keterbatasan ukuran sampel, dan tidak tersedianya koordinat GPS aktual.\n"
-        "- Interpretasi model memerlukan verifikasi lapangan oleh tenaga kesehatan."
+        "- Potensi bias: self-reporting dan keterbatasan ukuran sampel."
     )
 
     st.subheader("Kontak")
