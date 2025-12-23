@@ -63,7 +63,8 @@ def aggregate_location_metrics(dataframe: pd.DataFrame) -> pd.DataFrame:
         raise ValueError("Dataset missing required columns: %s" % ", ".join(missing_cols))
 
     df = dataframe.copy()
-    df["Anemia_Flag"] = df["Status_Anemia"].astype(str).str.contains("anemia", case=False)
+    status_labels = df["Status_Anemia"].astype(str).str.strip().str.lower()
+    df["Anemia_Flag"] = status_labels.eq("anemia")
 
     aggregation = {
         "Nama": "count",
