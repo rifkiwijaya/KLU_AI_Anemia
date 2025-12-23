@@ -2,7 +2,6 @@ __pycache__/
 *.pyc
 .DS_Store
 .env
-data/raw/*.xlsx
 models/*.pkl
 .streamlit/secrets.toml
 venv/
