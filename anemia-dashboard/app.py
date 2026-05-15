@@ -119,7 +119,7 @@ def compute_metrics(dataframe: Optional[pd.DataFrame]) -> Dict[str, float]:
     metrics["total_respondents"] = float(len(dataframe))
 
     if "Status_Anemia" in dataframe.columns:
-        anemia_cases = dataframe["Status_Anemia"].astype(str).str.contains("anemia", case=False).sum()
+        anemia_cases = dataframe["Status_Anemia"].astype(str).str.strip().str.lower().eq("anemia").sum()
         metrics["anemia_prevalence"] = round((anemia_cases / max(len(dataframe), 1)) * 100, 2)
 
     if "Hb" in dataframe.columns:

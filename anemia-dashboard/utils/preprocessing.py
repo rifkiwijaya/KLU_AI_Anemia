@@ -28,8 +28,6 @@ NUMERIC_FEATURES: Sequence[str] = (
 
 CATEGORICAL_FEATURES: Sequence[str] = (
     "Pendidikan",
-    "Status_KEK",
-    "Status_Anemia",
     "Trimester",
     "Gravida",
     "Terima_TTD",
@@ -137,8 +135,9 @@ def compute_risk_score(
         else pd.Series(["Non-Anemia"] * len(df), index=df.index)
     )
 
-    df["Status_KEK"] = status_kek_source.astype(str).str.contains("berisiko", case=False).astype(float)
-    df["Status_Anemia"] = status_anemia_source.astype(str).str.contains("anemia", case=False).astype(float)
+    # Convert to binary flags: 1 for risk condition, 0 otherwise
+    df["Status_KEK"] = status_kek_source.astype(str).str.strip().str.lower().str.startswith("berisiko").astype(float)
+    df["Status_Anemia"] = status_anemia_source.astype(str).str.strip().str.lower().eq("anemia").astype(float)
 
     score = np.zeros(len(df), dtype=float)
 

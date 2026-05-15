@@ -78,14 +78,12 @@ RISK_COLORS: Dict[str, str] = {
 
 NUMERIC_ENRICHED: List[str] = list(NUMERIC_FEATURES) + [
     "Kepatuhan_TTD",  # ensuring numeric
-    "Risk_Score",
     "Hb_x_Kepatuhan",
     "LILA_to_Protein",
 ]
 
 CATEGORICAL_ENRICHED: List[str] = list(CATEGORICAL_FEATURES) + [
     "Kelompok_Usia",
-    "Kategori_Hb",
 ]
 
 
@@ -131,10 +129,6 @@ def derive_risk_label(row: pd.Series) -> Optional[str]:
     if pd.notna(lila) and lila < 23.5:
         risk = escalate_risk(risk)
 
-    status_kek = str(row.get("Status_KEK", "")).lower()
-    if "berisiko" in status_kek:
-        risk = escalate_risk(risk)
-
     compliance = pd.to_numeric(row.get("Kepatuhan_TTD"), errors="coerce")
     if pd.notna(compliance):
         if compliance < 50:
@@ -177,19 +171,15 @@ def engineer_features(dataframe: pd.DataFrame) -> pd.DataFrame:
     else:
         df["Kelompok_Usia"] = df.get("Kelompok_Usia", "Tidak diketahui").astype(str)
 
-    hb_series = df["Hb"] if "Hb" in df.columns else pd.Series(np.nan, index=df.index, dtype=float)
-    hb_category = categorize_hb_status(hb_series).astype("string")
-    df["Kategori_Hb"] = hb_category.fillna("Tidak diketahui").astype(str)
+    # Keep derived columns only if they exist in raw data (don't create them)
+    if "Kategori_Hb" in df.columns:
+        df["Kategori_Hb"] = df["Kategori_Hb"].astype("string").fillna("Tidak diketahui").astype(str)
 
     if "Status_Anemia" in df.columns:
         df["Status_Anemia"] = df["Status_Anemia"].astype("string").fillna("Non-Anemia").astype(str)
-    else:
-        df["Status_Anemia"] = hb_category.fillna("Non-Anemia").astype(str)
 
     if "Status_KEK" in df.columns:
-        df["Status_KEK"] = df["Status_KEK"].astype("string").fillna("Tidak Berisiko")
-    if "Status_KEK" not in df.columns and "LILA" in df.columns:
-        df["Status_KEK"] = derive_kek_status(df["LILA"]).astype(str)
+        df["Status_KEK"] = df["Status_KEK"].astype("string").fillna("Tidak Berisiko").astype(str)
 
     df["Risk_Score"] = compute_risk_score(df)
     df = create_interaction_features(df)
