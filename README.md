@@ -161,15 +161,6 @@ If you use this project in your research, please cite:
 }
 ```
 
-## 📧 Contact & Support
-
-- **Project Lead**: prayaadhiganaglobal@gmail.com
-- **WhatsApp**: +62 812-3456-7890
-- **Issues**: [GitHub Issues](https://github.com/rifkiwijaya/KLU_AI_Anemia/issues)
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
