@@ -6,7 +6,7 @@
 
 ## 🎯 Project Overview
 
-An AI-powered dashboard system for analyzing and predicting maternal anemia risk in North Lombok Regency, Indonesia. This research project combines spatial analysis, natural language processing, and machine learning to support data-driven healthcare interventions for pregnant women.
+An AI-powered dashboard system for analyzing and predicting maternal anemia risk in North Lombok Regency, Indonesia. This research project combines spatial analysis, natural language processing, and machine learning to support data-driven healthcare interventions for pregnant women. You can access in http://206.189.81.131:8501/ (if server up)
 
 ## 🏗️ Repository Structure
 
