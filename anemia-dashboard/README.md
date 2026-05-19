@@ -1,16 +1,16 @@
-# Dashboard Pemetaan Risiko Anemia Ibu Hamil
+# Maternal Anemia Risk Intelligence Dashboard
 
-## Ringkasan Proyek
-Dashboard Streamlit ini dirancang untuk mendukung penelitian anemia pada ibu hamil di Kabupaten Lombok Utara. Aplikasi menggabungkan pemetaan hotspot spasial, analitik text mining terhadap kendala konsumsi Tablet Tambah Darah (TTD), dan segmentasi risiko berbasis machine learning untuk menyusun rekomendasi intervensi yang dapat ditindaklanjuti oleh tenaga kesehatan.
+## Project Overview
+This Streamlit dashboard is designed to support anemia research in pregnant women in North Lombok Regency. The application combines spatial hotspot mapping, text mining analytics for Iron-Folic Acid (IFA) supplement consumption barriers, and machine learning-based risk segmentation to develop actionable intervention recommendations for healthcare workers.
 
-## Fitur Utama
-- **Dashboard Utama** dengan metrik kunci, visualisasi ringkas, dan akses cepat ke modul analitik.
-- **Modul 1 – Peta Hotspot Anemia**: Clustering K-Means spasial dengan peta interaktif Folium, statistik cluster, ekspor hasil.
-- **Modul 2 – Analisis Kendala TTD**: NLP berbahasa Indonesia (tokenisasi, stemming Sastrawi, sentimen), word cloud, heatmap geografis, rekomendasi otomatis.
-- **Modul 3 – Segmentasi Risiko**: Random Forest classifier dengan tuning hyperparameter, evaluasi lengkap, formulir prediksi kasus baru, batch prediction, analisis what-if, pencarian kasus serupa, rekomendasi intervensi.
-- **Tema profesional** dengan styling kustom, kompatibel untuk deployment produksi.
+## Key Features
+- **Main Dashboard** with key metrics, summary visualizations, and quick access to analytical modules.
+- **Module 1 – Anemia Hotspot Mapping**: Spatial K-Means clustering with interactive Folium maps, cluster statistics, and result export.
+- **Module 2 – IFA Barriers Analysis**: Indonesian NLP (tokenization, Sastrawi stemming, sentiment), word clouds, geographic heatmaps, automated recommendations.
+- **Module 3 – Risk Segmentation**: Random Forest classifier with hyperparameter tuning, comprehensive evaluation, new case prediction forms, batch prediction, what-if analysis, similar case search, intervention recommendations.
+- **Professional theme** with custom styling, production-ready deployment.
 
-## Struktur Proyek
+## Project Structure
 ```
 anemia-dashboard/
 ├── app.py
@@ -37,42 +37,43 @@ anemia-dashboard/
 ├── utils/
 │   ├── data_loader.py
 │   ├── preprocessing.py
-│   └── visualization.py
+│   ├── visualization.py
+│   └── export_manager.py
 └── assets/
-    └── logo.png (opsional)
+    └── logo.png (optional)
 ```
 
-## Persyaratan Sistem
-- Python 3.9 atau lebih baru
-- Pip / virtual environment (direkomendasikan)
-- Streamlit 1.28 atau lebih baru
+## System Requirements
+- Python 3.9 or newer
+- Pip / virtual environment (recommended)
+- Streamlit 1.28 or newer
 
-## Instalasi
-1. Klona repositori ini.
-2. Buat dan aktifkan virtual environment:
+## Installation
+1. Clone this repository.
+2. Create and activate a virtual environment:
    ```bash
    python -m venv venv
    source venv/bin/activate  # macOS/Linux
    venv\Scripts\activate   # Windows
    ```
-3. Instal dependensi:
+3. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-4. Letakkan file Excel survei pada folder `data/raw/` sesuai nama di `config.py`.
+4. Place the survey Excel file in the `data/raw/` folder according to the name in `config.py`.
 
-## Menjalankan Aplikasi
+## Running the Application
 ```bash
 streamlit run app.py
 ```
-Aplikasi akan terbuka pada browser lokal (default: http://localhost:8501).
+The application will open in your local browser (default: http://localhost:8501).
 
-## Panduan Penggunaan
-1. **Dashboard Utama**: pantau metrik ringkas dan visualisasi awal. Gunakan tombol CTA untuk berpindah modul.
-2. **Modul 1**: atur jumlah cluster dan fitur tambahan di sidebar, eksplor peta, unduh hasil.
-3. **Modul 2**: gunakan filter demografis, telaah word cloud per kategori, unduh rekap analisis.
-4. **Modul 3**: lihat performa model, lakukan prediksi kasus baru atau batch, simulasikan skenario, unduh daftar risiko tinggi.
-5. **About**: baca metodologi, sumber data, dan kontak proyek.
+## Usage Guide
+1. **Main Dashboard**: Monitor summary metrics and initial visualizations. Use CTA buttons to navigate between modules.
+2. **Module 1**: Configure cluster count and additional features in the sidebar, explore the map, download results.
+3. **Module 2**: Use demographic filters, review word clouds per category, download analysis summary.
+4. **Module 3**: View model performance, perform new case or batch predictions, simulate scenarios, download high-risk list.
+5. **About**: Read methodology, data sources, and project contact information.
 
 ## Screenshot (Placeholder)
 - ![Dashboard Overview](docs/images/dashboard_overview.png)
@@ -80,31 +81,34 @@ Aplikasi akan terbuka pada browser lokal (default: http://localhost:8501).
 - ![TTD Barriers](docs/images/ttd_barriers.png)
 - ![Risk Segmentation](docs/images/risk_segmentation.png)
 
-## Deployment
-1. Siapkan VPS (Ubuntu) dengan Python 3.9+ dan pip.
-2. Salin kode proyek ke server (git clone atau rsync).
-3. Instal dependensi menggunakan `pip install -r requirements.txt`.
-4. Gunakan `pm2`, `systemd`, atau `supervisor` untuk menjaga layanan Streamlit tetap berjalan.
-5. Konfigurasikan reverse proxy (Nginx) untuk custom domain dan HTTPS.
-6. Perbarui `.streamlit/config.toml` untuk konfigurasi server produksi.
-7. Pastikan file data ditempatkan di `data/raw/` dan perbarui `config.py` bila nama/letak berbeda.
+## Prepare a VPS (Ubuntu) with Python 3.9+ and pip.
+2. Copy the project code to the server (git clone or rsync).
+3. Install dependencies using `pip install -r requirements.txt`.
+4. Use `pm2`, `systemd`, or `supervisor` to keep the Streamlit service running.
+5. Configure reverse proxy (Nginx) for custom domain and HTTPS.
+6. Update `.streamlit/config.toml` for production server configuration.
+7. Ensure data files are placed in `data/raw/` and update `config.py` if the name/location differs.
 
-Panduan rinci tersedia pada `docs/deployment_guide.md`.
+Detailed guide available in `docs/deployment_guide.md`.
 
-## Kontribusi
-- Fork repositori
-- Buat branch fitur: `git checkout -b fitur-anda`
-- Commit perubahan: `git commit -m "Tambah fitur X"`
-- Push branch: `git push origin fitur-anda`
-- Ajukan pull request dengan deskripsi rinci
+## Contributing
+- Fork the repository
+- Create a feature branch: `git checkout -b your-feature`
+- Commit changes: `git commit -m "Add feature X"`
+- Push branch: `git push origin your-feature`
+- Submit a pull request with detailed description
 
-## Lisensi
-Proyek ini dilisensikan di bawah MIT License. Silakan lihat file LICENSE jika tersedia.
+## License
+This project is licensed under the MIT License. See the LICENSE file if available.
 
-## Kontak
+## Contact
 - Email: prayaadhiganaglobal@gmail.com
 - WhatsApp: +62 812-3456-7890
 - Website: https://kluanemia.example.com
 
+## Data Privacy & Security
+⚠️ **Important:** This repository does NOT include any personally identifiable information (PII) or sensitive survey data. All data files are excluded via `.gitignore` for privacy protection.
+
 ---
+Developed by the KLU research team to improve anemia interventions in pregnant women through modern analytics
 Dikembangkan oleh tim penelitian KLU untuk meningkatkan intervensi anemia pada ibu hamil melalui pemanfaatan analitik modern.

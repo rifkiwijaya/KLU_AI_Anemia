@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.DS_Store
+.env
+models/*.pkl
+.streamlit/secrets.toml
+venv/
+.vscode/
+
+# Data files with personal information
+data/raw/*.xlsx
+data/raw/*.csv
+data/processed/*.xlsx
+data/processed/*.csv
